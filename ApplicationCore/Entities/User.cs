@@ -1,6 +1,6 @@
 ﻿namespace ApplicationCore.Entities;
 
-public class MovieGenres
+public class User
 {
     
 }

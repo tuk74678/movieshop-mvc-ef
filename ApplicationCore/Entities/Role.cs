@@ -1,6 +1,6 @@
 ﻿namespace ApplicationCore.Entities;
 
-public class Movies
+public class Role
 {
     
 }

@@ -1,6 +1,6 @@
 ﻿namespace ApplicationCore.Entities;
 
-public class UserRoles
+public class Purchase
 {
     
 }

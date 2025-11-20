@@ -1,6 +1,6 @@
 ﻿namespace ApplicationCore.Entities;
 
-public class Trailers
+public class Favorite
 {
     
 }

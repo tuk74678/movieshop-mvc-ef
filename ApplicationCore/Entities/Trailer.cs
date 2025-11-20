@@ -1,6 +1,6 @@
 ﻿namespace ApplicationCore.Entities;
 
-public class MovieCasts
+public class Trailer
 {
     
 }
