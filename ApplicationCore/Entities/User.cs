@@ -12,4 +12,8 @@ public class User
     public string? ProfilePictureUrl { get; set; }
     public bool? IsLocked { get; set; }
     public string salt { get; set; }
+    
+    // Navigation property
+    public ICollection<Favorite> Favorites { get; set; }
+    public ICollection<Review> Reviews { get; set; }
 }

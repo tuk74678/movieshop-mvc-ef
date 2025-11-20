@@ -20,6 +20,8 @@ public class MovieShopDbContext: DbContext
     public DbSet<Trailer> Trailers { get; set; }
     public DbSet<MovieGenre> MovieGenres { get; set; }
     public DbSet<MovieCast> MovieCasts { get; set; }
+    public DbSet<Favorite> Favorites { get; set; }
+    public DbSet<Review> Reviews { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,6 +29,30 @@ public class MovieShopDbContext: DbContext
         modelBuilder.Entity<User>(ConfigureUser);
         modelBuilder.Entity<MovieGenre>(ConfigureMovieGenre);
         modelBuilder.Entity<MovieCast>(ConfigureMovieCast);
+        modelBuilder.Entity<Favorite>(ConfigureFavorite);
+        modelBuilder.Entity<Review>(ConfigureReview);
+    }
+
+    private void ConfigureReview(EntityTypeBuilder<Review> modelBuilder)
+    {
+        modelBuilder.HasKey(r => new { r.UserId, r.MovieId });
+        modelBuilder.HasOne(r => r.User)
+            .WithMany(r =>r.Reviews)
+            .HasForeignKey(r => r.UserId);
+        modelBuilder.HasOne(r => r.Movie)
+            .WithMany(r =>r.Reviews)
+            .HasForeignKey(r => r.MovieId);
+    }
+
+    private void ConfigureFavorite(EntityTypeBuilder<Favorite> modelBuilder)
+    {
+        modelBuilder.HasKey(f => new { f.UserId, f.MovieId });
+        modelBuilder.HasOne(f => f.User)
+            .WithMany(f => f.Favorites)
+            .HasForeignKey(f => f.UserId);
+        modelBuilder.HasOne(f => f.Movie)
+            .WithMany(f => f.Favorites)
+            .HasForeignKey(f => f.MovieId);
     }
 
     private void ConfigureMovieCast(EntityTypeBuilder<MovieCast> modelBuilder)
