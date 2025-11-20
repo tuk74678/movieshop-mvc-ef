@@ -22,6 +22,8 @@ public class MovieShopDbContext: DbContext
     public DbSet<MovieCast> MovieCasts { get; set; }
     public DbSet<Favorite> Favorites { get; set; }
     public DbSet<Review> Reviews { get; set; }
+    public DbSet<Purchase> Purchases { get; set; }
+    public DbSet<UserRole> UserRoles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,6 +33,30 @@ public class MovieShopDbContext: DbContext
         modelBuilder.Entity<MovieCast>(ConfigureMovieCast);
         modelBuilder.Entity<Favorite>(ConfigureFavorite);
         modelBuilder.Entity<Review>(ConfigureReview);
+        modelBuilder.Entity<Purchase>(ConfigurePurchase);
+        modelBuilder.Entity<UserRole>(ConfigureUserRole);
+    }
+
+    private void ConfigureUserRole(EntityTypeBuilder<UserRole> modelBuilder)
+    {
+        modelBuilder.HasKey(ur => new { ur.UserId, ur.RoleId });
+        modelBuilder.HasOne(ur => ur.Role)
+            .WithMany(ur => ur.UserRoles)
+            .HasForeignKey(ur => ur.RoleId);
+        modelBuilder.HasOne(ur => ur.User)
+            .WithMany(u => u.UserRoles)
+            .HasForeignKey(ur => ur.UserId);
+    }
+
+    private void ConfigurePurchase(EntityTypeBuilder<Purchase> modelBuilder)
+    {
+        modelBuilder.HasKey(p => new { p.MovieId, p.UserId });
+        modelBuilder.HasOne(p => p.Movie)
+            .WithMany(p => p.Purchases)
+            .HasForeignKey(p => p.MovieId);
+        modelBuilder.HasOne(p => p.User)
+            .WithMany(p => p.Purchases)
+            .HasForeignKey(p => p.UserId);
     }
 
     private void ConfigureReview(EntityTypeBuilder<Review> modelBuilder)

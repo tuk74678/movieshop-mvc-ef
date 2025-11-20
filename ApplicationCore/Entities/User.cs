@@ -13,7 +13,9 @@ public class User
     public bool? IsLocked { get; set; }
     public string salt { get; set; }
     
-    // Navigation property
+    // Navigation properties
     public ICollection<Favorite> Favorites { get; set; }
     public ICollection<Review> Reviews { get; set; }
+    public ICollection<Purchase> Purchases { get; set; }
+    public ICollection<UserRole> UserRoles { get; set; }
 }

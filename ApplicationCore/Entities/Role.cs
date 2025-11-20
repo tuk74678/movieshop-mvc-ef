@@ -10,4 +10,6 @@ public class Role
     [Required]
     [MaxLength(20)]
     public string Name { get; set; }
+    // Navigation property
+    public ICollection<UserRole> UserRoles { get; set; }
 }
