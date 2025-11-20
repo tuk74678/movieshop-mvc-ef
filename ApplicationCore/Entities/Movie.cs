@@ -20,4 +20,7 @@ public class Movie
     public int? RunTime { get; set; }
     public string? UpdatedBy { get; set; }
     public DateTime? UpdatedDate { get; set; }
+    
+    // Navigation properties
+    public ICollection<Trailer> Trailers { get; set; }
 }
