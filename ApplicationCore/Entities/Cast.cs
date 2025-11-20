@@ -11,4 +11,7 @@ public class Cast
     [MaxLength(2084)]
     public string ProfilePath { get; set; }
     public string TmdbUrl { get; set; }
+    
+    // Navigation property
+    public ICollection<MovieCast> MovieCasts { get; set; }
 }
