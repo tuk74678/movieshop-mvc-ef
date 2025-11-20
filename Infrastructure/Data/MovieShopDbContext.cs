@@ -16,10 +16,12 @@ public class MovieShopDbContext: DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<Cast> Casts { get; set; }
     public DbSet<Movie> Movies { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Movie>(ConfigureMovie); 
+        modelBuilder.Entity<User>(ConfigureUser); 
     }
 
     public void ConfigureMovie(EntityTypeBuilder<Movie> builder)
@@ -45,6 +47,24 @@ public class MovieShopDbContext: DbContext
         builder.Property(m => m.RunTime).HasColumnType("int");
         builder.Property(m => m.UpdatedBy).HasColumnType("nvarchar(max)");
         builder.Property(m => m.UpdatedDate).HasColumnType("datetime2");
+    }
+
+    public void ConfigureUser(EntityTypeBuilder<User> builder)
+    {
+        // fluent api
+        // specifies all data types in the table
+        builder.ToTable("Users");
+        builder.HasKey(u => u.Id);
+        builder.Property(m => m.FirstName).IsRequired().HasColumnType("nvarchar(128)");
+        builder.Property(m => m.LastName).IsRequired().HasColumnType("nvarchar(128)");
+        builder.Property(m => m.DateOfBirth).IsRequired().HasColumnType("datetime2");
+        builder.Property(m => m.Email).IsRequired().HasColumnType("nvarchar(256)");
+        builder.Property(m => m.PhoneNumber).HasColumnType("nvarchar(16)");
+        builder.Property(m => m.HashedPassword).IsRequired().HasColumnType("nvarchar(1024)");
+        builder.Property(m => m.ProfilePictureUrl).HasColumnType("nvarchar(max)");
+        builder.Property(m => m.IsLocked).HasColumnType("bit");
+        builder.Property(m => m.salt).HasColumnType("nvarchar(1024)");
+        
     }
     
 }
