@@ -13,4 +13,5 @@ public class MovieShopDbContext: DbContext
     // map entity class to database tables
     public DbSet<Genre> Genres { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<Cast> Casts { get; set; }
 }
