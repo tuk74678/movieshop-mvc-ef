@@ -1,6 +1,8 @@
-﻿namespace ApplicationCore.Contracts.Repositories;
+﻿using ApplicationCore.Entities;
 
-public interface IMovieRepository
+namespace ApplicationCore.Contracts.Repositories;
+
+public interface IMovieRepository: IRepository<Movie>
 {
-    
+    IEnumerable<Movie> GetTop20Movies();
 }
