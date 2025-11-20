@@ -23,4 +23,5 @@ public class Movie
     
     // Navigation properties
     public ICollection<Trailer> Trailers { get; set; }
+    public ICollection<MovieGenre> MovieGenres { get; set; }
 }

@@ -18,11 +18,25 @@ public class MovieShopDbContext: DbContext
     public DbSet<Movie> Movies { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Trailer> Trailers { get; set; }
+    public DbSet<MovieGenre> MovieGenres { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Movie>(ConfigureMovie); 
-        modelBuilder.Entity<User>(ConfigureUser); 
+        modelBuilder.Entity<User>(ConfigureUser);
+        modelBuilder.Entity<MovieGenre>(ConfigureMovieGenre);
+    }
+
+    private void ConfigureMovieGenre(EntityTypeBuilder<MovieGenre> modelBuilder)
+    {
+        modelBuilder.HasKey(x => new { x.MovieId, x.GenreId });
+        modelBuilder.HasOne(x => x.Movie)
+            .WithMany(x => x.MovieGenres)
+            .HasForeignKey(x => x.MovieId);
+        modelBuilder.HasOne(x => x.Genre)
+            .WithMany(x => x.MovieGenres)
+            .HasForeignKey(x => x.GenreId);
+
     }
 
     public void ConfigureMovie(EntityTypeBuilder<Movie> builder)
