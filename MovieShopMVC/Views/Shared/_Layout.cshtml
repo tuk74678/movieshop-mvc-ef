@@ -23,17 +23,33 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            GENRES
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        GENRES
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-light">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                </ul>    
+                    <div class="d-flex ms-auto">
+                        <a class="btn rounded-pill me-2"
+                           asp-area="" asp-controller="Login" asp-action="Index"
+                           style="color:white; background-color:transparent; border:1px solid white;"
+                           onmouseover="this.style.backgroundColor='transparent'; this.style.color='white';"
+                           onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';">
+                            Login
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-light">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                        <a class="btn rounded-pill"
+                           asp-area="" asp-controller="Register" asp-action="Index"
+                           style="color:white; background-color:transparent; border:1px solid white;"
+                           onmouseover="this.style.backgroundColor='transparent'; this.style.color='white';"
+                           onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';">
+                            Register
+                        </a>
+                    </div>
             </div>
         </div>
     </nav>
