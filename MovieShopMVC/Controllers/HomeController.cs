@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
 using MovieShopMVC.Models;
@@ -8,16 +9,23 @@ namespace MovieShopMVC.Controllers;
 public class HomeController : Controller
 {
     private readonly IMovieService movieService;
-
-    public HomeController(IMovieService _movieService)
+    private readonly IGenreService genreService;
+    public HomeController(IMovieService _movieService, IGenreService _genreService)
     {
         movieService = _movieService;
+        genreService = _genreService;
     }
 
     public IActionResult Index()
     {
         var movies = movieService.Top20Movies();
         return View(movies);
+    }
+
+    public IActionResult Genre()
+    {
+        var genres = genreService.AllGenres();
+        return View(genres);
     }
 
     public IActionResult Privacy()

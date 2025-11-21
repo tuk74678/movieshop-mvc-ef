@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ApplicationCore.Entities.Genre>
+
+<ul class="dropdown-menu dropdown-menu-light">
+    @foreach (var genre in Model)
+    {
+        <li>
+            <a class="dropdown-item" asp-controller="Home" asp-action="Genre" asp-route-id="@genre.Id">
+                @genre.Name
+            </a>
+        </li>
+    }
+</ul>
