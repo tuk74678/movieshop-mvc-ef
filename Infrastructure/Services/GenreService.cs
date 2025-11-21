@@ -1,6 +1,18 @@
-﻿namespace Infrastructure.Services;
+﻿using ApplicationCore.Contracts.Repositories;
+using ApplicationCore.Contracts.Services;
+using ApplicationCore.Entities;
 
-public class GenreService
+namespace Infrastructure.Services;
+
+public class GenreService: IGenreService
 {
-    
+    private readonly IGenreRepository genreRepository;
+    public GenreService(IGenreRepository _genreRepository)
+    {
+        genreRepository = _genreRepository;
+    }
+    public List<Genre> AllGenres()
+    {
+        return genreRepository.GetAllGenres().ToList();
+    }
 }

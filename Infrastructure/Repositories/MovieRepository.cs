@@ -15,4 +15,5 @@ public class MovieRepository: BaseRepository<Movie>, IMovieRepository
         var movies = _movieShopDbContext.Movies.OrderByDescending(m=> m.Revenue).Take(20);
         return movies;
     }
+  
 }
