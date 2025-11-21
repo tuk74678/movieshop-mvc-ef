@@ -19,4 +19,11 @@
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Views\Account\" />
+      <Folder Include="Views\Admin\" />
+      <Folder Include="Views\Cast\" />
+      <Folder Include="Views\User\" />
+    </ItemGroup>
+
 </Project>
