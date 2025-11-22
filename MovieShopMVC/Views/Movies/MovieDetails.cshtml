@@ -1,0 +1,77 @@
+﻿@model ApplicationCore.Models.MovieDetailsModel
+
+<div class="container mt-2">
+    <div class="row"style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8) ), url(@Model.BackdropUrl); 
+                            background-size: cover ">
+        <div class="col-md-4">
+            <div style="padding: 40px">
+                <img src= "@Model.PosterUrl" width="150"/>
+            </div>
+        </div>
+        <div class="col-md-8 mt-2">
+            
+            <h2 style="color: white">@Model.Title</h2>
+            <h5 style ="color: white">@Model.Tagline</h5>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 mt-1">
+                        <p style="color:white; font-size: small; text-align: left">@Model.RunTime m | @Model.ReleaseDate.Value.Year</p>
+                    </div>
+                    <div class="col-md-8">
+                        @{
+                            foreach (var genre in @Model.Genres)
+                            {
+                                <span class="badge rounded-pill bg-secondary">@genre.Name</span>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <span class="badge bg-warning text-dark" style="font-size: 1rem;">
+                ⭐
+            </span>
+            <p class="mt-3" style="color: white; font-size: medium">
+                <strong>Overview: </strong>@Model.Overview
+            </p>    
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 mt-2">
+            <h5 class="mb-2">MOVIE FACTS</h5>
+            <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                <div><i class="bi bi-calendar3"></i> Release Date</div>
+                <div class="badge bg-secondary">@Model.ReleaseDate?.ToString("MMM dd, yyyy")</div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                <div><i class="bi bi-hourglass-split"></i> Run Time</div>
+                <div class="badge bg-secondary">@Model.RunTime m</div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                <div><i class="bi bi-cash-stack"></i> Box Office</div>
+                <div class="badge bg-secondary">@Model.Revenue?.ToString("C")</div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                <div><i class="bi bi-wallet2"></i> Budget</div>
+                <div class="badge bg-secondary">@Model.Budget?.ToString("C")</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 mt-2">
+                <h5 class="mb-2">TRAILERS</h5>
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                    <div>
+                        <a href="@Model.ImdbUrl" target="_blank" class="text-decoration-none">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                        @Model.Title
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
