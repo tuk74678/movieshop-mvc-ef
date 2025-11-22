@@ -6,7 +6,7 @@
         @foreach (var movie in Model)
         {
             <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4">
-                <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">
+                <a asp-controller="Movies" asp-action="MovieDetails" asp-route-id="@movie.Id">
                     <img src="@movie.PosterUrl" alt="@movie.Title" class="img-fluid"/>
                 </a>
             </div>
