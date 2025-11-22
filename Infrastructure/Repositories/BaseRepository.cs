@@ -1,5 +1,7 @@
-﻿using ApplicationCore.Contracts.Repositories;
+﻿using System.Net.Http.Headers;
+using ApplicationCore.Contracts.Repositories;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -13,26 +15,37 @@ public class BaseRepository<T>: IRepository<T> where T: class
     }
     public T Insert(T entity)
     {
-        throw new NotImplementedException();
+        _movieShopDbContext.Set<T>().Add(entity);
+        _movieShopDbContext.SaveChanges();
+        return entity;
     }
 
     public T DeleteById(int id)
     {
-        throw new NotImplementedException();
+        var entity = _movieShopDbContext.Set<T>().Find(id);
+        if (entity != null)
+        {
+            _movieShopDbContext.Set<T>().Remove(entity);
+            _movieShopDbContext.SaveChanges();
+            return entity;
+        }
+        return null;
     }
 
     public T Update(T entity)
     {
-        throw new NotImplementedException();
+        _movieShopDbContext.Entry(entity).State = EntityState.Modified;
+        _movieShopDbContext.SaveChanges();
+        return entity;
     }
 
     public IEnumerable<T> GetAll()
     {
-        throw new NotImplementedException();
+        return _movieShopDbContext.Set<T>().ToList();
     }
 
     public T GetById(int id)
     {
-        throw new NotImplementedException();
+        return _movieShopDbContext.Set<T>().Find(id);
     }
 }
