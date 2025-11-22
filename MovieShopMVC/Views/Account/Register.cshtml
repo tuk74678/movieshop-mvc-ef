@@ -1,2 +1,56 @@
-﻿
-<h4>Register Page</h4>
+﻿@model RegisterViewModel;
+
+@{ 
+    ViewData["Title"] = "Register your account";
+}
+<div class="container vh-100 d-flex justify-content-center align-items-top">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h3 class="text-center mb-4">Register</h3>
+                <form>
+                    <div class="mb-2">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+
+                    </div>
+
+                    <div class="mb-2">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-2">
+                        <label asp-for="DateOfBirth" class="form-label"></label>
+                        <input asp-for="DateOfBirth" class="form-control" type="date" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-2">
+                        <label asp-for="EmailAddress" class="form-label"></label>
+                        <input asp-for="EmailAddress" class="form-control" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-2">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-2">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Create Account <i class="bi bi-person-plus-fill"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
