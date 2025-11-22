@@ -11,6 +11,7 @@ public class GenreService: IGenreService
     {
         genreRepository = _genreRepository;
     }
+    // get all genres
     public List<Genre> AllGenres()
     {
         return genreRepository.GetAllGenres().ToList();

@@ -16,12 +16,13 @@ public class HomeController : Controller
         genreService = _genreService;
     }
 
+    [HttpGet]
     public IActionResult Index()
     {
         var movies = movieService.Top20Movies();
         return View(movies);
     }
-
+    [HttpGet]
     public IActionResult Genre()
     {
         var genres = genreService.AllGenres();
