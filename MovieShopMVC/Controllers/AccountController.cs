@@ -4,8 +4,17 @@ namespace MovieShopMVC.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: AccountController
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+        public ActionResult Hello()
         {
             return View();
         }
