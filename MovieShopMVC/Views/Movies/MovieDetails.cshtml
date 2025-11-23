@@ -147,12 +147,15 @@
             </div>
             <div class="row">
                 <h5 class="mb-2 mt-2">TRAILERS</h5>
-                <div class="d-flex align-items-center gap-2">
-                    <a href="@Model.ImdbUrl" target="_blank" class="text-danger fs-4">
+                @foreach (var trailer in Model.Trailers)
+                {
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <a href="@trailer.TrailerUrl" target="_blank" class="text-danger fs-4">
                         <i class="bi bi-youtube"></i>
                     </a>
-                    <span>@Model.Title Trailer</span>
+                    <span>@trailer.Name</span>
                 </div>
+                }
             </div>
         </div>
         

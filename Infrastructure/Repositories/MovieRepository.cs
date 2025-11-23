@@ -29,6 +29,7 @@ public class MovieRepository: BaseRepository<Movie>, IMovieRepository
         return _movieShopDbContext.Movies
             .Include(m => m.MovieGenres).ThenInclude(mg => mg.Genre)
             .Include(m=> m.MovieCasts).ThenInclude(m => m.Cast)
+            .Include(m=>m.Trailers)
             .FirstOrDefault(m => m.Id == id);
     }
     

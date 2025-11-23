@@ -71,6 +71,14 @@ public class MovieService: IMovieService
                     ProfilePath = cast.Cast.ProfilePath,
                     Character = cast.Character
                 });
+            movieDetailsModel.Trailers = new List<TrailerModel>();
+            foreach (var trailer in movies.Trailers)
+                movieDetailsModel.Trailers.Add(new TrailerModel()
+                {
+                    Id = trailer.Id,
+                    Name = trailer.Name,
+                    TrailerUrl = trailer.TrailerUrl
+                });
             return movieDetailsModel;
         }
         return null;
