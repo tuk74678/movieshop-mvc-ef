@@ -1,8 +1,10 @@
 using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Contracts.Services;
+using ApplicationCore.Entities;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +25,38 @@ builder.Services.AddDbContext<MovieShopDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MovieShopDbConnection"));
 });
 
+// Add cookie authentication
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";      // redirect here if not logged in
+        options.AccessDeniedPath = "/Account/AccessDenied";  // redirect here if access denied
+        options.ExpireTimeSpan = TimeSpan.FromDays(1);
+    });
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<MovieShopDbContext>();
+
+    // Check if admin exists
+    if (!context.Users.Any(u => u.Email == "admin@example.com"))
+    {
+        var admin = new User
+        {
+            FirstName = "Admin",
+            LastName = "User",
+            Email = "admin@example.com",
+            IsLocked = false,
+            salt = "", // leave empty if not using salt yet
+            HashedPassword = "Admin123!" // temporarily store plain password
+        };
+
+        context.Users.Add(admin);
+        context.SaveChanges();
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -36,6 +69,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+// Add authentication & authorization middleware
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

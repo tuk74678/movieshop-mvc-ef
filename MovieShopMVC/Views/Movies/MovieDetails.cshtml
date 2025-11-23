@@ -166,17 +166,32 @@
                 <div class="row align-items-center mb-3 ps-3">
                     <!-- Cast Image -->
                     <div class="col-auto">
-                        <img src="@cast.ProfilePath" class="rounded-circle" alt="@cast.Name" width="50" height="50" style="object-fit: cover;" />
+                        <a asp-controller="Cast" asp-action="CastDetails" asp-route-id="@cast.Id">
+                            <img src="@cast.ProfilePath"
+                                 class="rounded-circle"
+                                 alt="@cast.Name"
+                                 width="50"
+                                 height="50"
+                                 style="object-fit: cover;"/>
+                        </a>
                     </div>
 
                     <!-- Cast Name -->
                     <div class="col">
-                        @cast.Name
+                        <a asp-controller="Cast" 
+                           asp-action="CastDetails" 
+                           asp-route-id="@cast.Id" 
+                           class="text-decoration-none text-dark">@cast.Name
+                        </a>
                     </div>
 
                     <!-- Character Name -->
                     <div class="col">
-                        @cast.Character
+                        <a asp-controller="Cast" 
+                           asp-action="CastDetails" 
+                           asp-route-id="@cast.Id"
+                           class="text-decoration-none text-dark"> @cast.Character
+                        </a>
                     </div>
                 </div>
                 <hr />

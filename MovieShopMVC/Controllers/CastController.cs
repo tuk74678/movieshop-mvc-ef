@@ -9,6 +9,10 @@ namespace MovieShopMVC.Controllers
         {
             return View();
         }
+        public ActionResult CastDetails()
+        {
+            return View();
+        }
 
     }
 }
