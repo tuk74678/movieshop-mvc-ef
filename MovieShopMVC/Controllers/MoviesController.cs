@@ -28,7 +28,7 @@ namespace MovieShopMVC.Controllers
         [HttpGet]
         public ActionResult MovieDetails(int id)
         {
-            var movie = movieService.GetMovieDetails(id);
+            var movie = movieService.GetMovieDetailsAsync(id);
             return View(movie);
         }
 

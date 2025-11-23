@@ -17,10 +17,10 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var movies = movieService.Top20Movies();
-        return View(movies);
+        var topMovies = await movieService.Top20MoviesAsync(); // <-- await here
+        return View(topMovies); // now passing List<MovieCardModel>
     }
     [HttpGet]
     public IActionResult Genre()
