@@ -4,7 +4,7 @@ namespace ApplicationCore.Contracts.Repositories;
 
 public interface IMovieRepository: IRepository<Movie>
 {
-    IEnumerable<Movie> GetTop20Movies();
+    Task<IEnumerable<Movie>> GetTop20MoviesAsync();
     Task<IEnumerable<Movie>> GetMoviesByGenreAsync(int genreId);
-    Movie GetMovieById(int id);
+    Task<Movie> GetMovieByIdAsync(int id);
 }

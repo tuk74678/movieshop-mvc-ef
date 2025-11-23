@@ -13,75 +13,67 @@ public class MovieService: IMovieService
         movieRepository = _movieRepository;
     }
     // get the top 20 movie
-    public List<MovieCardModel> Top20Movies()
+    // Optimized Top 20 movies
+    public async Task<List<MovieCardModel>> Top20MoviesAsync()
     {
-        var movies = movieRepository.GetTop20Movies();
-        var movieCardModels = new List<MovieCardModel>();
-        foreach (var movie in movies)
-        {
-            movieCardModels.Add(new MovieCardModel()
-            {
-                Id = movie.Id, PosterUrl = movie.PosterUrl, Title = movie.Title
-            });
-        }
+        var movies = await movieRepository.GetTop20MoviesAsync(); // await async call
 
-        return movieCardModels;
+        return movies.Select(m => new MovieCardModel
+        {
+            Id = m.Id,
+            Title = m.Title,
+            PosterUrl = m.PosterUrl
+        }).ToList();
     }
 
+    // Optimized Get movies by genre
     public async Task<IEnumerable<Movie>> GetMoviesByGenreAsync(int genreId)
     {
-        // Using Task.Run just for async in this example
-        return await Task.Run(() => movieRepository.GetMoviesByGenreAsync(genreId));
+        return await movieRepository.GetMoviesByGenreAsync(genreId); // just await
     }
 
-    public MovieDetailsModel GetMovieDetails(int id)
+    // Optimized Get movie details
+    public async Task<MovieDetailsModel> GetMovieDetailsAsync(int id)
     {
-        var movies = movieRepository.GetMovieById(id);
-        if (movies != null)
+        var movie = await movieRepository.GetMovieByIdAsync(id); // await async method
+
+        if (movie == null)
+            return null;
+
+        return new MovieDetailsModel
         {
-            var movieDetailsModel = new MovieDetailsModel()
+            Id = movie.Id,
+            Title = movie.Title,
+            Overview = movie.Overview,
+            Tagline = movie.Tagline,
+            Budget = movie.Budget,
+            Revenue = movie.Revenue,
+            BackdropUrl = movie.BackdropUrl,
+            ImdbUrl = movie.ImdbUrl,
+            TmdbUrl = movie.TmdbUrl,
+            ReleaseDate = movie.ReleaseDate,
+            RunTime = movie.RunTime,
+            Price = movie.Price,
+            PosterUrl = movie.PosterUrl,
+            Genres = movie.MovieGenres.Select(g => new GenreModel
             {
-                Id = movies.Id,
-                Title = movies.Title,
-                Overview = movies.Overview,
-                Tagline = movies.Tagline,
-                Budget = movies.Budget,
-                Revenue = movies.Revenue,
-                BackdropUrl = movies.BackdropUrl,
-                ImdbUrl = movies.ImdbUrl,
-                TmdbUrl = movies.TmdbUrl,
-                ReleaseDate = movies.ReleaseDate,
-                RunTime = movies.RunTime,
-                Price = movies.Price,
-                PosterUrl = movies.PosterUrl,
-            };
-            movieDetailsModel.Genres = new List<GenreModel>();
-            foreach (var genre in movies.MovieGenres)
-                movieDetailsModel.Genres.Add(new GenreModel
-                {
-                    Id = genre.GenreId, 
-                    Name = genre.Genre.Name
-                });
-            movieDetailsModel.Casts = new List<CastModel>();
-            foreach (var cast in movies.MovieCasts)
-                movieDetailsModel.Casts.Add(new CastModel()
-                {
-                    Id = cast.CastId, 
-                    Name = cast.Cast.Name,
-                    ProfilePath = cast.Cast.ProfilePath,
-                    Character = cast.Character
-                });
-            movieDetailsModel.Trailers = new List<TrailerModel>();
-            foreach (var trailer in movies.Trailers)
-                movieDetailsModel.Trailers.Add(new TrailerModel()
-                {
-                    Id = trailer.Id,
-                    Name = trailer.Name,
-                    TrailerUrl = trailer.TrailerUrl
-                });
-            return movieDetailsModel;
-        }
-        return null;
+                Id = g.GenreId,
+                Name = g.Genre.Name
+            }).ToList(),
+            Casts = movie.MovieCasts.Select(c => new CastModel
+            {
+                Id = c.CastId,
+                Name = c.Cast.Name,
+                ProfilePath = c.Cast.ProfilePath,
+                Character = c.Character
+            }).ToList(),
+            Trailers = movie.Trailers.Select(t => new TrailerModel
+            {
+                Id = t.Id,
+                Name = t.Name,
+                TrailerUrl = t.TrailerUrl
+            }).ToList()
+        };
     }
     
 }

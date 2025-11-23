@@ -5,7 +5,7 @@ namespace ApplicationCore.Contracts.Services;
 
 public interface IMovieService
 {
-    List<MovieCardModel>Top20Movies();
+    Task<List<MovieCardModel>> Top20MoviesAsync();
     Task<IEnumerable<Movie>> GetMoviesByGenreAsync(int genreId);
-    MovieDetailsModel GetMovieDetails(int id);
+    Task<MovieDetailsModel> GetMovieDetailsAsync(int id);
 }
