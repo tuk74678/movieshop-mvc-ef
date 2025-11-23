@@ -1,14 +1,14 @@
 ﻿@model ApplicationCore.Models.MovieDetailsModel
 
 <div class="container mt-2">
-    <div class="row"style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8) ), url(@Model.BackdropUrl); 
+    <div class="row" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8) ), url(@Model.BackdropUrl); 
                             background-size: cover ">
         <div class="col-md-4">
             <div style="padding: 40px">
                 <img src= "@Model.PosterUrl" width="150"/>
             </div>
         </div>
-        <div class="col-md-8 mt-2">
+        <div class="col-md-6 mt-2">
             
             <h2 style="color: white">@Model.Title</h2>
             <h5 style ="color: white">@Model.Tagline</h5>
@@ -34,11 +34,97 @@
             <p class="mt-3" style="color: white; font-size: medium">
                 <strong>Overview: </strong>@Model.Overview
             </p>    
-
         </div>
+        <div class="d-flex col-md-2 flex-column gap-3 mt-4" style="width: 200px;">
+            
+            <!-- Review Button -->
+            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                <i class="bi bi-pencil-square"></i> REVIEW
+            </button>
+
+            <!-- Buy Button -->
+            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#buyModal">
+                BUY $9.90
+            </button>
+        </div>
+
+
+        <!-- REVIEW MODAL -->
+        <div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Leave a Review</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="reviewForm">
+                            <!-- Rating Dropdown -->
+                            <div class="mb-3">
+                                <label for="rating" class="form-label">Rate this movie:</label>
+                                <select class="form-select" id="rating" name="rating" required>
+                                    <option value="" disabled selected>Select rating</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+
+                            <!-- Review textarea -->
+                            <div class="mb-3">
+                                <textarea class="form-control" name="reviewText" rows="5" placeholder="Write your review..." required></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Submit Review</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- BUY MODAL -->
+        <div class="modal fade" id="buyModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Purchase Item</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Are you sure you want to buy this item for <strong>$9.90</strong>?</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success">Confirm Purchase</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
+    
+<div class="container mt-2">
     <div class="row">
-        <div class="col-md-5 mt-2">
+        <div class="col-md-5 mt-3 bg-light p-3 rounded shadow-sm">
             <h5 class="mb-2">MOVIE FACTS</h5>
             <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
                 <div><i class="bi bi-calendar3"></i> Release Date</div>
@@ -59,19 +145,25 @@
                 <div><i class="bi bi-wallet2"></i> Budget</div>
                 <div class="badge bg-secondary">@Model.Budget?.ToString("C")</div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5 mt-2">
-                <h5 class="mb-2">TRAILERS</h5>
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                    <div>
-                        <a href="@Model.ImdbUrl" target="_blank" class="text-decoration-none">
-                            <i class="bi bi-youtube"></i>
-                        </a>
-                        @Model.Title
-                    </div>
+            <div class="row">
+                <h5 class="mb-2 mt-2">TRAILERS</h5>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="@Model.ImdbUrl" target="_blank" class="text-danger fs-4">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                    <span>@Model.Title Trailer</span>
                 </div>
             </div>
         </div>
+        
+        <div class="col-md-7 mt-2">
+            <h5 class="mb-2">CAST</h5>
+            <div class="row">
+                <div class="col-4 col-md-3 mb-3">
+                    
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
