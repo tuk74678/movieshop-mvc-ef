@@ -79,19 +79,34 @@ namespace MovieShopMVC.Controllers
         }
 
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginVM)
         {
-            if (!ModelState.IsValid) return View(loginVM);
+            if (!ModelState.IsValid) 
+                return View(loginVM);
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginVM.EmailAddress);
+            // Fetch only the necessary columns for login
+            var user = await _context.Users
+                .Where(u => u.Email == loginVM.EmailAddress)
+                .Select(u => new
+                {
+                    u.Id,
+                    u.FirstName,
+                    u.LastName,
+                    u.Email,
+                    u.HashedPassword,
+                    u.salt
+                })
+                .FirstOrDefaultAsync();
+
             if (user != null && VerifyPassword(loginVM.Password, user.HashedPassword, user.salt))
             {
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
+                    new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim("Role", user.Email == "admin@example.com" ? "Admin" : "User")
+                    new Claim(ClaimTypes.Role, user.Email == "admin@example.com" ? "Admin" : "User")
                 };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -107,6 +122,7 @@ namespace MovieShopMVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
