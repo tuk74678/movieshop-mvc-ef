@@ -31,22 +31,52 @@
                     @await Component.InvokeAsync("GenreDropdown")
                 </li>
                 </ul>    
-                    <div class="d-flex ms-auto">
-                        <a class="btn rounded-pill me-2"
-                           asp-area="" asp-controller="Account" asp-action="Login"
-                           style="color:white; background-color:transparent; border:1px solid white;"
-                           onmouseover="this.style.backgroundColor='transparent'; this.style.color='white';"
-                           onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';">
-                            Login
-                        </a>
-                        <a class="btn rounded-pill"
-                           asp-area="" asp-controller="Account" asp-action="Register"
-                           style="color:white; background-color:transparent; border:1px solid white;"
-                           onmouseover="this.style.backgroundColor='transparent'; this.style.color='white';"
-                           onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';">
-                            Register
-                        </a>
-                    </div>
+                <ul class="navbar-nav ms-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                @User.Identity.Name
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" asp-controller="Movies" asp-action="Favorites">Favorites</a></li>
+                                <li><a class="dropdown-item" asp-controller="Movies" asp-action="Purchased">Purchased</a></li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Dashboard">Admin Panel</a></li>
+                                }
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>
+                                    <form method="post" asp-controller="Account" asp-action="Logout" class="dropdown-item p-0 m-0">
+                                        <button type="submit" class="btn btn-link text-decoration-none w-100 text-start">Log out</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                   
+                        <li class="nav-item ">
+                            <a class="nav-link btn rounded-pill me-2"
+                               asp-controller="Account"
+                               asp-action="Login"style="color:white; background-color:transparent; border:1px solid white;"
+                               onmouseover="this.style.backgroundColor='transparent'; this.style.color='white';"
+                               onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';">
+                                Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn rounded-pill"
+                               asp-controller="Account"
+                               asp-action="Register" style="color:white; background-color:transparent; border:1px solid white;"
+                               onmouseover="this.style.backgroundColor='transparent'; this.style.color='white';"
+                               onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';">
+                                Register
+                            </a>
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
     </nav>
