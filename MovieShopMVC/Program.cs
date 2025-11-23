@@ -22,7 +22,10 @@ builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 
 builder.Services.AddDbContext<MovieShopDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MovieShopDbConnection"));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("MovieShopDbConnection"),
+        sqlOptions => sqlOptions.CommandTimeout(60) // Timeout in seconds
+    );
 });
 
 // Add cookie authentication
