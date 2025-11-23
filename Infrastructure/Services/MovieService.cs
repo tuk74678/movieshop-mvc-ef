@@ -36,7 +36,7 @@ public class MovieService: IMovieService
 
     public MovieDetailsModel GetMovieDetails(int id)
     {
-        var movies = movieRepository.GetMovieByIdWithGenres(id);
+        var movies = movieRepository.GetMovieById(id);
         if (movies != null)
         {
             var movieDetailsModel = new MovieDetailsModel()
@@ -59,10 +59,21 @@ public class MovieService: IMovieService
             foreach (var genre in movies.MovieGenres)
                 movieDetailsModel.Genres.Add(new GenreModel
                 {
-                    Id = genre.GenreId, Name = genre.Genre.Name
+                    Id = genre.GenreId, 
+                    Name = genre.Genre.Name
+                });
+            movieDetailsModel.Casts = new List<CastModel>();
+            foreach (var cast in movies.MovieCasts)
+                movieDetailsModel.Casts.Add(new CastModel()
+                {
+                    Id = cast.CastId, 
+                    Name = cast.Cast.Name,
+                    ProfilePath = cast.Cast.ProfilePath,
+                    Character = cast.Character
                 });
             return movieDetailsModel;
         }
         return null;
     }
+    
 }

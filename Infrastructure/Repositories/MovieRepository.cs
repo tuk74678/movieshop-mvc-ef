@@ -24,11 +24,12 @@ public class MovieRepository: BaseRepository<Movie>, IMovieRepository
             .ToListAsync();
     }
     // Get a single movie by Id including genres
-    public Movie GetMovieByIdWithGenres(int id)
+    public Movie GetMovieById(int id)
     {
         return _movieShopDbContext.Movies
-            .Include(m => m.MovieGenres)
-            .ThenInclude(mg => mg.Genre)
+            .Include(m => m.MovieGenres).ThenInclude(mg => mg.Genre)
+            .Include(m=> m.MovieCasts).ThenInclude(m => m.Cast)
             .FirstOrDefault(m => m.Id == id);
     }
+    
 }

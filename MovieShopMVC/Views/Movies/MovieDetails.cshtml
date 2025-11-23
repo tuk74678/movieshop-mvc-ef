@@ -4,8 +4,8 @@
     <div class="row" style="background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8) ), url(@Model.BackdropUrl); 
                             background-size: cover ">
         <div class="col-md-4">
-            <div style="padding: 40px">
-                <img src= "@Model.PosterUrl" width="150"/>
+            <div style="padding: 20px">
+                <img src= "@Model.PosterUrl" width="200" class="ms-5"/>
             </div>
         </div>
         <div class="col-md-6 mt-2">
@@ -156,13 +156,28 @@
             </div>
         </div>
         
-        <div class="col-md-7 mt-2">
-            <h5 class="mb-2">CAST</h5>
-            <div class="row">
-                <div class="col-4 col-md-3 mb-3">
-                    
+        <div class="col-md-7 mt-4 p-3 rounded shadow-sm ps-4">
+            <h5 class="mb-4">CAST</h5>
+            @foreach (var cast in @Model.Casts)
+            {
+                <div class="row align-items-center mb-3 ps-3">
+                    <!-- Cast Image -->
+                    <div class="col-auto">
+                        <img src="@cast.ProfilePath" class="rounded-circle" alt="@cast.Name" width="50" height="50" style="object-fit: cover;" />
+                    </div>
+
+                    <!-- Cast Name -->
+                    <div class="col">
+                        @cast.Name
+                    </div>
+
+                    <!-- Character Name -->
+                    <div class="col">
+                        @cast.Character
+                    </div>
                 </div>
-            </div>
+                <hr />
+            }
         </div>
         
     </div>
