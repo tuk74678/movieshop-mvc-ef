@@ -1,36 +1,64 @@
-﻿<div class="container mt-4">
+﻿@model ApplicationCore.Models.CastDetailsModel
+
+<div class="container mt-4">
 
     <div class="row align-items-start g-4">
-        
+        <!-- Profile Picture -->
         <div class="col-md-3 col-sm-4">
-            <img src="" class="img-fluid rounded" alt="hello" style="width:200px;" />
+            <img src="@Model.ProfilePath" class="img-fluid rounded" alt="hello" style="width:200px;" />
         </div>
-        
+        <!-- Actor Name -->
         <div class="col-md-9 col-sm-8">
-            <h3>Name</h3>
-            <h4><strong>Gender:</strong> Gender</h4>
-            <a href="" target="_blank" class="btn btn-primary btn-sm">TMDB Profile</a>
+            <h3 class="fs-3 fw-bold">@Model.Name</h3>
+            <!-- Gender -->
+            <h5 class="fs-6 mt-1">
+            <strong>Gender:</strong>
+                @(
+                Model.Gender == "1" ? "Female" :
+                Model.Gender == "2" ? "Male" :
+                Model.Gender == "3" ? "Non-binary / Other" :
+                "Unknown"
+                )
+            </h5>
+            <!-- TMDB Profile -->
+            <a href="@Model.TmdbUrl" target="_blank" class="btn btn-primary btn-sm">TMDB Profile</a>
         </div>
     </div>
 
     <hr />
 
-    <h2>Movies</h2>
+    <h2 class="mb-3">Movies</h2>
     
     <div class="row g-4">
-        @* @foreach (var movie in Model.Movies) *@
-        @* { *@
-        <div class="col-6 col-md-6 mb-4">
-            <div class="card h-100">
-                <img src="" class="card-img-top" />
-                <div class="card-body">
-                    <h6>Movie Title</h6>
-                    <p class="text-muted">Character</p>
-                    @* <a href="/Movies/Details/@movie.MovieId" class="btn btn-outline-primary btn-sm">View Movie</a> *@
-                </div>
+        @foreach (var movie in @Model.Movies)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a asp-controller="Movies" asp-action="MovieDetails" asp-route-id="@movie.Id"
+                   class="text-decoration-none text-dark">
+
+                    <div class="card h-100 shadow-sm custom-hover">
+
+                        <!-- Poster -->
+                        <img src="@movie.PosterUrl"
+                             class="card-img-top"
+                             alt="@movie.Title"
+                             style="height: 350px; object-fit: cover;" />
+
+                        <div class="card-body">
+
+                            <!-- Movie Title -->
+                            <h6 class="fw-bold">@movie.Title</h6>
+
+                            <!-- Character -->
+                            <p class="text-muted mb-1">
+                                <strong>Character(s):</strong> @movie.Character
+                            </p>
+
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-        @* } *@
+        }
     </div>
 
 </div>
