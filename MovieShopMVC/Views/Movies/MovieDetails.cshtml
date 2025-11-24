@@ -48,7 +48,7 @@
 
             @* Buy Button *@
             <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#buyModal">
-                BUY $9.90
+                BUY $@Model.Price
             </button>
         </div>
 
@@ -111,13 +111,17 @@
                     </div>
 
                     <div class="modal-body">
-                        <p>Are you sure you want to buy this item for <strong>$9.90</strong>?</p>
+                        <p>Are you sure you want to buy this item for <strong>$@Model.Price</strong>?</p>
                     </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success">Confirm Purchase</button>
-                    </div>
+                    <form asp-controller="Movies" asp-action="Buy" method="post">
+                        <input type="hidden" name="movieId" value="@Model.Id" />
+                        <input type="hidden" name="price" value="@Model.Price" />
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Confirm Purchase</button>
+                        </div>
+                    </form>
 
                 </div>
             </div>
