@@ -39,16 +39,32 @@
                                 @User.Identity.Name
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" asp-controller="User" asp-action="Favorites">Favorites</a></li>
-                                <li><a class="dropdown-item" asp-controller="User" asp-action="Purchased">Purchased</a></li>
+                                <li><a class="dropdown-item" 
+                                       asp-controller="User" 
+                                       asp-action="Purchased">Movies 
+                                    <i class="bi bi-film"></i></a></li>
+                                <li><a class="dropdown-item" 
+                                       asp-controller="User" 
+                                       asp-action="Favorites">Favorites
+                                    <i class="bi bi-star-fill"></i></a></li>
+                                <li><a class="dropdown-item" 
+                                       asp-controller="User" 
+                                       asp-action="UserInfo">Account
+                                    <i class="bi bi-person-circle"></i></a></li>
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li><a class="dropdown-item" asp-controller="Admin" asp-action="Dashboard">Admin Panel</a></li>
                                 }
-                                <li><hr class="dropdown-divider" /></li>
+                                <li><hr class="dropdown-divider"/></li>
                                 <li>
-                                    <form method="post" asp-controller="Account" asp-action="Logout" class="dropdown-item p-0 m-0">
-                                        <button type="submit" class="btn btn-link text-decoration-none w-100 text-start">Log out</button>
+                                    <form method="post" 
+                                          asp-controller="Account" 
+                                          asp-action="Logout" 
+                                          class="dropdown-item p-0 m-0">
+                                        <button type="submit" 
+                                                class="btn btn-link text-decoration-none w-100 text-start">Log out
+                                            <i class="bi bi-box-arrow-right"></i>
+                                        </button>
                                     </form>
                                 </li>
                             </ul>
