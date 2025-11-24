@@ -4,6 +4,7 @@ namespace MovieShopMVC.Controllers
 {
     public class CastController : Controller
     {
+        
         // GET: CastController
         public ActionResult Index()
         {
