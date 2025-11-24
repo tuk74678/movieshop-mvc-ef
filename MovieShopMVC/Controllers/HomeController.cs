@@ -19,8 +19,8 @@ public class HomeController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var topMovies = await movieService.Top20MoviesAsync(); // <-- await here
-        return View(topMovies); // now passing List<MovieCardModel>
+        var topMovies = await movieService.Top20MoviesAsync();
+        return View(topMovies);
     }
     [HttpGet]
     public IActionResult Genre()

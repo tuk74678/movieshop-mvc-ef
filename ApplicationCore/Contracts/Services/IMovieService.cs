@@ -7,5 +7,5 @@ public interface IMovieService
 {
     Task<List<MovieCardModel>> Top20MoviesAsync();
     Task<IEnumerable<Movie>> GetMoviesByGenreAsync(int genreId);
-    Task<MovieDetailsModel> GetMovieDetailsAsync(int id);
+    Task<MovieDetailsModel> GetMovieDetails(int id);
 }

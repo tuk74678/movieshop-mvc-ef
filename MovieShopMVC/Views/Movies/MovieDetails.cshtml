@@ -5,20 +5,23 @@
                             background-size: cover ">
         <div class="col-md-4">
             <div style="padding: 20px">
-                <img src= "@Model.PosterUrl" width="200" class="ms-5"/>
+                @* Movie Poster *@
+                <img src="@Model.PosterUrl" width="200" class="ms-5"/>
             </div>
         </div>
         <div class="col-md-6 mt-2">
-            
+            @* Title and Tagline *@
             <h2 style="color: white">@Model.Title</h2>
             <h5 style ="color: white">@Model.Tagline</h5>
             
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 mt-1">
+                        @* Runtime and Release Date *@
                         <p style="color:white; font-size: small; text-align: left">@Model.RunTime m | @Model.ReleaseDate.Value.Year</p>
                     </div>
                     <div class="col-md-8">
+                        @* Genre *@
                         @{
                             foreach (var genre in @Model.Genres)
                             {
@@ -31,25 +34,26 @@
             <span class="badge bg-warning text-dark" style="font-size: 1rem;">
                 ⭐
             </span>
+            @* Overview paragraph *@
             <p class="mt-3" style="color: white; font-size: medium">
                 <strong>Overview: </strong>@Model.Overview
             </p>    
         </div>
         <div class="d-flex col-md-2 flex-column gap-3 mt-4" style="width: 200px;">
             
-            <!-- Review Button -->
+            @* Review Button *@
             <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#reviewModal">
                 <i class="bi bi-pencil-square"></i> REVIEW
             </button>
 
-            <!-- Buy Button -->
+            @* Buy Button *@
             <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#buyModal">
                 BUY $9.90
             </button>
         </div>
 
 
-        <!-- REVIEW MODAL -->
+        @* REVIEW MODAL *@
         <div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -79,7 +83,7 @@
                                 </select>
                             </div>
 
-                            <!-- Review textarea -->
+                            @* Review textarea *@
                             <div class="mb-3">
                                 <textarea class="form-control" name="reviewText" rows="5" placeholder="Write your review..." required></textarea>
                             </div>
@@ -96,7 +100,7 @@
         </div>
 
 
-        <!-- BUY MODAL -->
+        @* BUY MODAL *@
         <div class="modal fade" id="buyModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -125,6 +129,7 @@
 <div class="container mt-2">
     <div class="row">
         <div class="col-md-5 mt-3 bg-light p-3 rounded shadow-sm">
+            @* Movie Facts Block *@
             <h5 class="mb-2">MOVIE FACTS</h5>
             <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
                 <div><i class="bi bi-calendar3"></i> Release Date</div>
@@ -149,16 +154,16 @@
                 <h5 class="mb-2 mt-2">TRAILERS</h5>
                 @foreach (var trailer in Model.Trailers)
                 {
-                <div class="d-flex align-items-center gap-2 mb-2">
-                    <a href="@trailer.TrailerUrl" target="_blank" class="text-danger fs-4">
-                        <i class="bi bi-youtube"></i>
-                    </a>
-                    <span>@trailer.Name</span>
-                </div>
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <a href="@trailer.TrailerUrl" target="_blank" class="text-danger fs-4">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+                        <span>@trailer.Name</span>
+                    </div>
                 }
             </div>
         </div>
-        
+        @* Casts Block *@
         <div class="col-md-7 mt-4 p-3 rounded shadow-sm ps-4">
             <h5 class="mb-4">CAST</h5>
             @foreach (var cast in @Model.Casts)
@@ -176,7 +181,7 @@
                         </a>
                     </div>
 
-                    <!-- Cast Name -->
+                    @* Cast Name *@
                     <div class="col">
                         <a asp-controller="Cast" 
                            asp-action="Details" 
@@ -185,7 +190,7 @@
                         </a>
                     </div>
 
-                    <!-- Character Name -->
+                    @* Character Name *@
                     <div class="col">
                         <a asp-controller="Cast" 
                            asp-action="Details" 
