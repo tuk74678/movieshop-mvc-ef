@@ -41,7 +41,6 @@ namespace MovieShopMVC.Controllers
 
             return View(purchase);
         }
-
         public ActionResult UserInfo()
         {
             return View();
