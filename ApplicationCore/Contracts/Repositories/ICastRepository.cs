@@ -1,6 +1,8 @@
-﻿namespace ApplicationCore.Contracts.Repositories;
+﻿using ApplicationCore.Entities;
 
-public interface ICastRepository
+namespace ApplicationCore.Contracts.Repositories;
+
+public interface ICastRepository: IRepository<Cast>
 {
-    
+    Task<Cast> GetCastById(int id);
 }
