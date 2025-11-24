@@ -1,0 +1,36 @@
+﻿<div class="container mt-4">
+
+    <div class="row align-items-start g-4">
+        
+        <div class="col-md-3 col-sm-4">
+            <img src="" class="img-fluid rounded" alt="hello" style="width:200px;" />
+        </div>
+        
+        <div class="col-md-9 col-sm-8">
+            <h3>Name</h3>
+            <h4><strong>Gender:</strong> Gender</h4>
+            <a href="" target="_blank" class="btn btn-primary btn-sm">TMDB Profile</a>
+        </div>
+    </div>
+
+    <hr />
+
+    <h2>Movies</h2>
+    
+    <div class="row g-4">
+        @* @foreach (var movie in Model.Movies) *@
+        @* { *@
+        <div class="col-6 col-md-6 mb-4">
+            <div class="card h-100">
+                <img src="" class="card-img-top" />
+                <div class="card-body">
+                    <h6>Movie Title</h6>
+                    <p class="text-muted">Character</p>
+                    @* <a href="/Movies/Details/@movie.MovieId" class="btn btn-outline-primary btn-sm">View Movie</a> *@
+                </div>
+            </div>
+        </div>
+        @* } *@
+    </div>
+
+</div>

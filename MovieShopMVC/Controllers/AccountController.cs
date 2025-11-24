@@ -13,20 +13,6 @@ namespace MovieShopMVC.Controllers
 {
     public class AccountController : Controller
     {
-        // [HttpGet]
-        // public ActionResult Login()
-        // {
-        //     return View();
-        // }
-        //
-        // public ActionResult Register()
-        // {
-        //     return View();
-        // }
-        // public ActionResult Hello()
-        // {
-        //     return View();
-        // }
     
         private readonly MovieShopDbContext _context;
 
@@ -77,8 +63,7 @@ namespace MovieShopMVC.Controllers
 
             return RedirectToAction("Login");
         }
-
-        [HttpPost]
+        
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginVM)
         {

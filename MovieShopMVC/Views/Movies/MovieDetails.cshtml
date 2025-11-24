@@ -166,7 +166,7 @@
                 <div class="row align-items-center mb-3 ps-3">
                     <!-- Cast Image -->
                     <div class="col-auto">
-                        <a asp-controller="Cast" asp-action="CastDetails" asp-route-id="@cast.Id">
+                        <a asp-controller="Cast" asp-action="Details" asp-route-id="@cast.Id">
                             <img src="@cast.ProfilePath"
                                  class="rounded-circle"
                                  alt="@cast.Name"
@@ -179,7 +179,7 @@
                     <!-- Cast Name -->
                     <div class="col">
                         <a asp-controller="Cast" 
-                           asp-action="CastDetails" 
+                           asp-action="Details" 
                            asp-route-id="@cast.Id" 
                            class="text-decoration-none text-dark">@cast.Name
                         </a>
@@ -188,7 +188,7 @@
                     <!-- Character Name -->
                     <div class="col">
                         <a asp-controller="Cast" 
-                           asp-action="CastDetails" 
+                           asp-action="Details" 
                            asp-route-id="@cast.Id"
                            class="text-decoration-none text-dark"> @cast.Character
                         </a>

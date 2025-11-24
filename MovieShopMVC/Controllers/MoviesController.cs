@@ -26,10 +26,10 @@ namespace MovieShopMVC.Controllers
             return View(movies);
         }
         [HttpGet]
-        public ActionResult MovieDetails(int id)
+        public async Task<IActionResult> MovieDetails(int id)
         {
-            var movie = movieService.GetMovieDetailsAsync(id);
-            return View(movie);
+            var model = await movieService.GetMovieDetailsAsync(id); // await the async call
+            return View(model); // now it's the correct type
         }
 
     }
