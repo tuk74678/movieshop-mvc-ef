@@ -30,6 +30,7 @@ public class CastService: ICastService
             {
                 Id = mc.MovieId,
                 Title = mc.Movie.Title,
+                PosterUrl = mc.Movie.PosterUrl,
                 Character = mc.Character
             }).ToList(),
         };
