@@ -28,8 +28,8 @@ namespace MovieShopMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> MovieDetails(int id)
         {
-            var model = await movieService.GetMovieDetailsAsync(id); // await the async call
-            return View(model); // now it's the correct type
+            var models = await movieService.GetMovieDetailsAsync(id); // await the async call
+            return View(models); // now it's the correct type
         }
 
     }
