@@ -43,7 +43,6 @@ namespace MovieShopMVC.Controllers
                 TempData["Error"] = "Email already exists";
                 return View(registerVM);
             }
-
             var salt = GenerateSalt();
             var hashedPassword = HashPassword(registerVM.Password, salt);
 
