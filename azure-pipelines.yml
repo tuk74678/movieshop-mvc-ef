@@ -1,3 +1,8 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
 trigger:
 - main
 
@@ -6,54 +11,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  artifactFolder: '$(Build.ArtifactStagingDirectory)/movieshop'
-  zipFile: '$(Build.ArtifactStagingDirectory)/movieshop.zip'
 
-stages:
-- stage: BuildAndDeploy
-  jobs:
-  - job: BuildJob
-    displayName: Build and Deploy MovieShop
-    steps:
-    # Restore dependencies
-    - task: DotNetCoreCLI@2
-      displayName: 'Restore NuGet packages'
-      inputs:
-        command: 'restore'
-        projects: '**/*.csproj'
-
-    # Build project
-    - task: DotNetCoreCLI@2
-      displayName: 'Build project'
-      inputs:
-        command: 'build'
-        projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration)'
-
-    # Publish to dedicated folder
-    - task: DotNetCoreCLI@2
-      displayName: 'Publish project'
-      inputs:
-        command: 'publish'
-        projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration) --output $(artifactFolder)'
-
-    # Zip the published folder
-    - task: ArchiveFiles@2
-      displayName: 'Archive publish folder'
-      inputs:
-        rootFolderOrFile: '$(artifactFolder)'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(zipFile)'
-        replaceExistingArchive: true
-
-    # Deploy to Azure App Service
-    - task: AzureRmWebAppDeployment@5
-      displayName: 'Deploy to Azure App Service'
-      inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'Azure subscription 1(419030f3-cc2c-4843-8c52-b99d9a3f3b2e)'
-        appType: 'webApp'
-        WebAppName: 'movieshop'
-        packageForLinux: '$(zipFile)'
+steps:
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
