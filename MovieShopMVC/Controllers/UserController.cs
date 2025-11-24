@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MovieShopMVC.Controllers
@@ -6,6 +7,14 @@ namespace MovieShopMVC.Controllers
     {
         // GET: UserController
         public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Favorites()
+        {
+            return View();
+        }
+        public ActionResult Purchased()
         {
             return View();
         }
