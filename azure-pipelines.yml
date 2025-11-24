@@ -1,7 +1,25 @@
-- task: AzureRmWebAppDeployment@5
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(419030f3-cc2c-4843-8c52-b99d9a3f3b2e)'
-    appType: 'webApp'
-    WebAppName: 'movieshop'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+trigger:
+- main
+
+pool:
+  name: Default
+
+variables:
+  buildConfiguration: 'Release'
+
+stages:
+- stage: BuildAndDeploy
+  jobs:
+  - job: BuildJob
+    steps:
+    - script: dotnet build --configuration $(buildConfiguration)
+      displayName: 'dotnet build $(buildConfiguration)'
+      
+    # Azure App Service deployment
+    - task: AzureRmWebAppDeployment@5
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Azure subscription 1(419030f3-cc2c-4843-8c52-b99d9a3f3b2e)'
+        appType: 'webApp'
+        WebAppName: 'movieshop'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
