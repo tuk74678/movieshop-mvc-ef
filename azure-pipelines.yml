@@ -14,12 +14,17 @@ stages:
     steps:
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: 'dotnet build $(buildConfiguration)'
-      
-    # Azure App Service deployment
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
     - task: AzureRmWebAppDeployment@5
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'Azure subscription 1(419030f3-cc2c-4843-8c52-b99d9a3f3b2e)'
         appType: 'webApp'
         WebAppName: 'movieshop'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/**'
