@@ -8,5 +8,5 @@ public class PurchasedMovieModel
     public Guid PurchaseNumber { get; set; }
     public decimal TotalPrice { get; set; }
     
-    List<MovieCardModel> Movies  { get; set; }
+    public MovieCardModel Movie { get; set; }
 }
