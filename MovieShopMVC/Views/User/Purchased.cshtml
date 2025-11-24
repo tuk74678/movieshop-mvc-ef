@@ -1,1 +1,51 @@
-﻿<h2>MOVIE PURCHASED:</h2>
+﻿@model List<ApplicationCore.Models.PurchasedMovieModel>
+
+<div class="container mt-4 mb-4">
+    <h3>Purchased Movies</h3>
+    <div class="row">
+        @foreach (var purchase in Model)
+        {
+            <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4">
+                <div class="card">
+                    <!-- Trigger modal -->
+                    <img src="@purchase.Movie.PosterUrl" class="card-img-top" style="cursor:pointer;" 
+                         data-bs-toggle="modal" data-bs-target="#purchaseModal@purchase.Id" />
+
+                    <div class="card-body">
+                        <h5 class="card-title">@purchase.Movie.Title</h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="purchaseModal@purchase.Id" 
+                 tabindex="-1" aria-labelledby="purchaseModalLabel@purchase.Id" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" 
+                     style="max-width: 500px; max-height: 200px;"> 
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5>Purchased Details</h5>
+                            <button type="button" 
+                                    class="btn-close" 
+                                    data-bs-dismiss="modal" 
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="@purchase.Movie.PosterUrl" class="img-fluid mb-3" style="width: 120px; height: auto;"/>
+                            <h4><strong></strong> @purchase.Movie.Title</h4>
+                            <p><strong>Price:</strong> $@purchase.TotalPrice</p>
+                            <p><strong>Purchased On:</strong> @purchase.PurchaseDateTime.ToString("f")</p>
+                            <p><strong>Purchase Number:</strong> @purchase.PurchaseNumber</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" 
+                                    class="btn btn-secondary" 
+                                    data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
