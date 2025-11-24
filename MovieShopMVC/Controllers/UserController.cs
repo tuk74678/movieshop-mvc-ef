@@ -46,6 +46,5 @@ namespace MovieShopMVC.Controllers
         {
             return View();
         }
-
     }
 }
