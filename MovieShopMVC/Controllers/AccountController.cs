@@ -47,6 +47,7 @@ namespace MovieShopMVC.Controllers
             var hashedPassword = HashPassword(registerVM.Password, salt);
             var newUser = new User
             {
+                
                 FirstName = registerVM.FirstName,
                 LastName = registerVM.LastName,
                 Email = registerVM.EmailAddress,
