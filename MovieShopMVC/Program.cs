@@ -16,11 +16,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<ICastService, CastService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // Repositories
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<ICastRepository, CastRepository>();
+builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
 
 builder.Services.AddDbContext<MovieShopDbContext>(options =>
 {
