@@ -1,17 +1,7 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
-trigger:
-- main
-
-pool:
-  name: Default
-
-variables:
-  buildConfiguration: 'Release'
-
-steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: AzureRmWebAppDeployment@5
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(419030f3-cc2c-4843-8c52-b99d9a3f3b2e)'
+    appType: 'webApp'
+    WebAppName: 'movieshop'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
