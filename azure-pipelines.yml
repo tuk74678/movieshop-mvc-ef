@@ -59,7 +59,7 @@ stages:
       displayName: 'Deploy to Azure App Service'
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'Azure subscription 1(419030f3-cc2c-4843-8c52-b99d9a3f3b2e)'
+        azureSubscription: 'Azure subscription 1 (419030f3-cc2c-4843-8c52-b99d9a3f3b2e)'
         appType: 'webApp'
         WebAppName: 'movieshop'
         packageForLinux: '$(zipFile)'
