@@ -6,5 +6,5 @@ public interface IMovieRepository: IRepository<Movie>
 {
     Task<IEnumerable<Movie>> GetTop20MoviesAsync();
     Task<IEnumerable<Movie>> GetMoviesByGenreAsync(int genreId);
-    Task<Movie> GetMovieById(int id);
+    Task<Movie> GetMovieByIdAsync(int id);
 }

@@ -33,7 +33,7 @@ namespace MovieShopMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> MovieDetails(int id)
         {
-            var models = await movieService.GetMovieDetails(id); // await the async call
+            var models = await movieService.GetMovieDetailsAsync(id); // await the async call
             return View(models);
         }
         [HttpPost]
@@ -45,7 +45,7 @@ namespace MovieShopMVC.Controllers
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             // Check if the user already bought the movie
-            var existingPurchase = await purchaseRepository.GetPurchaseByUserAndMovie(userId, movieId);
+            var existingPurchase = await purchaseRepository.GetPurchaseByUserAndMovieAsync(userId, movieId);
             if (existingPurchase != null)
             {
                 TempData["Message"] = "You already own this movie.";

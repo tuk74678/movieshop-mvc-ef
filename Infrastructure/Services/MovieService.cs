@@ -33,9 +33,9 @@ public class MovieService: IMovieService
     }
 
     // Optimized Get movie details
-    public async Task<MovieDetailsModel> GetMovieDetails(int id)
+    public async Task<MovieDetailsModel> GetMovieDetailsAsync(int id)
     {
-        var movie = await movieRepository.GetMovieById(id); // await async method
+        var movie = await movieRepository.GetMovieByIdAsync(id); // await async method
 
         if (movie == null)
             return null;

@@ -18,7 +18,7 @@ namespace MovieShopMVC.Controllers
         }
         public async Task<ActionResult> Details(int id)
         {
-            var models = await castService.GetCastDetails(id); // await the async call
+            var models = await castService.GetCastDetailsAsync(id); // await the async call
             return View(models); 
         }
 

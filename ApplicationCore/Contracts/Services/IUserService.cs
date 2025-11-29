@@ -4,5 +4,5 @@ namespace ApplicationCore.Contracts.Services;
 
 public interface IUserService
 {
-    Task<List<PurchasedMovieModel>> GetPurchasedMovies(int userId);
+    Task<List<PurchasedMovieModel>> GetPurchasedMoviesAsync(int userId);
 }

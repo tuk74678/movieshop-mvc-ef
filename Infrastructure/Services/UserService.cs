@@ -13,10 +13,10 @@ public class UserService: IUserService
         _purchaseRepository = purchaseRepository;
         _movieRepository = movieRepository;
     }
-    public async Task<List<PurchasedMovieModel>> GetPurchasedMovies(int userId)
+    public async Task<List<PurchasedMovieModel>> GetPurchasedMoviesAsync(int userId)
     {
         // Get all purchases for the user, including movie details
-        var purchases = await _purchaseRepository.GetPurchasesByUser(userId);
+        var purchases = await _purchaseRepository.GetPurchasesByUserAsync(userId);
 
         var purchasedMovies = purchases.Select(p => new PurchasedMovieModel
         {

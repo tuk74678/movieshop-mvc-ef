@@ -11,7 +11,7 @@ public class CastRepository: BaseRepository<Cast>, ICastRepository
     {
     }
 
-    public async Task<Cast> GetCastById(int id)
+    public async Task<Cast> GetCastByIdAsync(int id)
     {
         return await _movieShopDbContext.Casts
             .AsNoTracking()

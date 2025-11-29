@@ -11,7 +11,7 @@ public class PurchaseRepository: BaseRepository<Purchase>, IPurchaseRepository
     {
     }
     // Check if the user purchased the movie
-    public async Task<Purchase> GetPurchaseByUserAndMovie(int userId, int movieId)
+    public async Task<Purchase> GetPurchaseByUserAndMovieAsync(int userId, int movieId)
     {
         return await _movieShopDbContext.Purchases
             .Include(p => p.Movie)
@@ -24,7 +24,7 @@ public class PurchaseRepository: BaseRepository<Purchase>, IPurchaseRepository
         await _movieShopDbContext.SaveChangesAsync();
     }
     // Fetch the purchased movies
-    public async Task<List<Purchase>> GetPurchasesByUser(int userId)
+    public async Task<List<Purchase>> GetPurchasesByUserAsync(int userId)
     {
         return await _movieShopDbContext.Purchases
             .Include(p => p.Movie) // This ensures Movie is loaded

@@ -4,7 +4,7 @@ namespace ApplicationCore.Contracts.Repositories;
 
 public interface IPurchaseRepository: IRepository<Purchase>
 {
-    Task<Purchase> GetPurchaseByUserAndMovie(int userId, int movieId);
+    Task<Purchase> GetPurchaseByUserAndMovieAsync(int userId, int movieId);
     Task AddPurchaseAsync(Purchase purchase);
-    Task<List<Purchase>> GetPurchasesByUser(int userId);
+    Task<List<Purchase>> GetPurchasesByUserAsync(int userId);
 }

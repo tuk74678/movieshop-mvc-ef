@@ -4,5 +4,5 @@ namespace ApplicationCore.Contracts.Repositories;
 
 public interface ICastRepository: IRepository<Cast>
 {
-    Task<Cast> GetCastById(int id);
+    Task<Cast> GetCastByIdAsync(int id);
 }

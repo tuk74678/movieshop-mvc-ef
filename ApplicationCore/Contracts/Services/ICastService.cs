@@ -4,5 +4,5 @@ namespace ApplicationCore.Contracts.Services;
 
 public interface ICastService
 {
-    Task<CastDetailsModel> GetCastDetails(int id);
+    Task<CastDetailsModel> GetCastDetailsAsync(int id);
 }

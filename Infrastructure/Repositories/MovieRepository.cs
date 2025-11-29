@@ -46,7 +46,7 @@ public class MovieRepository: BaseRepository<Movie>, IMovieRepository
             .ToListAsync();
     }
     // Get a single movie by Id including genres
-    public async Task<Movie> GetMovieById(int id)
+    public async Task<Movie> GetMovieByIdAsync(int id)
     {
         return await _movieShopDbContext.Movies
             .AsNoTracking()

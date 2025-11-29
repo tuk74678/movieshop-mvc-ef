@@ -25,7 +25,7 @@ namespace MovieShopMVC.Controllers
         public async Task<IActionResult> Purchased()
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var purchasedMovies = await _userService.GetPurchasedMovies(userId);
+            var purchasedMovies = await _userService.GetPurchasedMoviesAsync(userId);
             return View(purchasedMovies);
         }
         
@@ -33,7 +33,7 @@ namespace MovieShopMVC.Controllers
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            var purchases = await _userService.GetPurchasedMovies(userId);
+            var purchases = await _userService.GetPurchasedMoviesAsync(userId);
             var purchase = purchases.FirstOrDefault(p => p.MovieId == movieId);
 
             if (purchase == null)

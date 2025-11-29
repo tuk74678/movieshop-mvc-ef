@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MovieShopMVC.Views.Shared.Components.GenreDropDown;
 
+//  View Component for displaying all genres in the dropdown
 public class GenreDropdownViewComponent : ViewComponent
 {
     private readonly IGenreService _genreService;
@@ -12,7 +13,7 @@ public class GenreDropdownViewComponent : ViewComponent
     {
         _genreService = genreService;
     }
-
+    
     public async Task<IViewComponentResult> InvokeAsync()
     {
         // Fetch genres from the service
