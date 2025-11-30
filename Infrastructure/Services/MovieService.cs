@@ -75,5 +75,10 @@ public class MovieService: IMovieService
             }).ToList()
         };
     }
+    public async Task<PagedResult<Movie>> GetMoviesByGenrePagedAsync(int genreId, int pageNumber, int pageSize)
+    {
+        return await movieRepository.GetMoviesByGenrePagedAsync(genreId, pageNumber, pageSize);
+    }
+
     
 }
