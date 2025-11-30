@@ -14,69 +14,9 @@
             }
         </div>
 
-        <!-- Pagination Links -->
+        <!-- Partial view for pagination -->
         <div class="d-flex justify-content-center mt-4">
-            <nav>
-                @if (Model.PageSize > 0)
-                {
-                    <ul class="pagination">
-
-                        @if (Model.PageNumber > 1)
-                        {
-                            <li class="page-item">
-                                <a class="page-link"
-                                   asp-controller="Movies"
-                                   asp-action="ByGenre"
-                                   asp-route-genreId="@ViewBag.GenreId"
-                                   asp-route-pageNumber="@(Model.PageNumber - 1)"
-                                   asp-route-pageSize="@Model.PageSize">
-                                    Previous
-                                </a>
-                            </li>
-                        }
-                        @* Implemented sliding window paginatio to show 10 page numbers max *@
-                        @{
-                            int maxPagesToShow = 10;
-                            int startPage = Math.Max(1, Model.PageNumber - 4);
-                            int endPage = Math.Min(Model.TotalPages, startPage + maxPagesToShow - 1);
-
-                            // Adjust start if near the end
-                            if ((endPage - startPage) < maxPagesToShow - 1)
-                            {
-                                startPage = Math.Max(1, endPage - maxPagesToShow + 1);
-                            }
-                        }
-
-                        @* Page Number Loop *@
-                        @for (int i = startPage; i <= endPage; i++)
-                        {
-                            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
-                                <a class="page-link"
-                                   asp-action="ByGenre"
-                                   asp-route-genreId="@ViewBag.GenreId"
-                                   asp-route-pageNumber="@i"
-                                   asp-route-pageSize="@Model.PageSize">
-                                    @i
-                                </a>
-                            </li>
-                        }
-
-                        @if (Model.PageNumber < Model.TotalPages)
-                        {
-                            <li class="page-item">
-                                <a class="page-link"
-                                   asp-controller="Movies"
-                                   asp-action="ByGenre"
-                                   asp-route-genreId="@ViewBag.GenreId"
-                                   asp-route-pageNumber="@(Model.PageNumber + 1)"
-                                   asp-route-pageSize="@Model.PageSize">
-                                    Next
-                                </a>
-                            </li>
-                        }
-                    </ul>
-                }
-            </nav>
+            @await Html.PartialAsync("_Pagination", Model)
         </div>
 
     </div>
