@@ -22,13 +22,13 @@ namespace MovieShopMVC.Controllers
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> ByGenre(int genreId)
+        public async Task<IActionResult> ByGenre(int genreId, int pageNumber = 1, int pageSize = 30)
         {
-            // Call the service (which calls repository)
-            var movies = await movieService.GetMoviesByGenreAsync(genreId);
+            var model = await movieService.GetMoviesByGenrePagedAsync(genreId, pageNumber, pageSize);
 
-            // Pass data to the view
-            return View(movies);
+            ViewBag.GenreId = genreId; // for pagination links
+
+            return View(model);
         }
         [HttpGet]
         public async Task<IActionResult> MovieDetails(int id)

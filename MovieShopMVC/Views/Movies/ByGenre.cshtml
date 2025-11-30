@@ -1,18 +1,61 @@
-﻿@model IEnumerable<ApplicationCore.Entities.Movie>
+﻿@model ApplicationCore.Models.PagedResult<ApplicationCore.Entities.Movie>
 
 @* Movies by genre page *@
 <div class="rounded">
     <div class="container-fluid">
         <div class="row">
-            @* This will show a collection of movie to the content page *@
-            @foreach (var movie in Model)
+            @foreach (var movie in Model.Data)
             {
                 <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-4">
                     <a asp-controller="Movies" asp-action="MovieDetails" asp-route-id="@movie.Id">
-                        <img src="@movie.PosterUrl" alt="@movie.Title" class="img-fluid"/>
+                        <img src="@movie.PosterUrl" alt="@movie.Title" class="img-fluid" />
                     </a>
                 </div>
             }
         </div>
+
+        <!-- Pagination Links -->
+        <div class="d-flex justify-content-center mt-4">
+            <nav>
+                <ul class="pagination">
+
+                    @if (Model.PageNumber > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" 
+                               asp-controller="Movies" 
+                               asp-action="ByGenre" 
+                               asp-route-genreId="@ViewBag.GenreId"
+                               asp-route-pageNumber="@(Model.PageNumber - 1)"
+                               asp-route-pageSize="@Model.PageSize">
+                                Previous
+                            </a>
+                        </li>
+                    }
+
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            Page @Model.PageNumber of @Model.TotalPages
+                        </span>
+                    </li>
+
+                    @if (Model.PageNumber < Model.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" 
+                               asp-controller="Movies" 
+                               asp-action="ByGenre" 
+                               asp-route-genreId="@ViewBag.GenreId"
+                               asp-route-pageNumber="@(Model.PageNumber + 1)"
+                               asp-route-pageSize="@Model.PageSize">
+                                Next
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+            </nav>
+        </div>
+
     </div>
 </div>
