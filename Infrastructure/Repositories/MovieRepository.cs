@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Entities;
+using ApplicationCore.Models;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,5 +56,38 @@ public class MovieRepository: BaseRepository<Movie>, IMovieRepository
             .Include(m => m.Trailers)
             .FirstOrDefaultAsync(m => m.Id == id);
     }
+    
+    public async Task<PagedResult<Movie>> GetMoviesByGenrePagedAsync(int genreId, int pageNumber, int pageSize)
+    {
+        var query = _movieShopDbContext.Movies
+            .AsNoTracking()
+            .Where(m => m.MovieGenres.Any(mg => mg.GenreId == genreId));
+
+        // Count total records
+        var totalMovies = await query.CountAsync();
+
+        // Fetch only the requested page
+        var movies = await query
+            .OrderBy(m => m.Title)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(m => new Movie
+            {
+                Id = m.Id,
+                Title = m.Title,
+                PosterUrl = m.PosterUrl,
+                Revenue = m.Revenue
+            })
+            .ToListAsync();
+
+        return new PagedResult<Movie>
+        {
+            Data = movies,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalRecords = totalMovies
+        };
+    }
+
     
 }
